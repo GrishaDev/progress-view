@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 let category='';
 let graph = '';
+let valueType='';
 let disabled = true;
 
 export default class FormDialog extends React.Component {
@@ -79,7 +80,7 @@ export default class FormDialog extends React.Component {
                         id="category"
                         options={this.props.categories}
                         getOptionLabel={option => option}
-                        style={{ width: 300, padding: '0 0 30px 0' }}
+                        style={{  padding: '0 0 30px 0' }}
                         freeSolo
                         onChange={this.onCategorySelect.bind(this)}
                         renderInput={params => (
@@ -88,14 +89,17 @@ export default class FormDialog extends React.Component {
                         )}
                     />
 
-                    <TextField required label="Graph" variant="outlined" fullWidth
+                    <TextField required label="Graph" variant="outlined" fullWidth style={{  padding: '0 0 30px 0' }}
                     error={this.state.graphError} helperText={this.state.graphHelper}  onChange={this.onChangeGraph.bind(this)}/>
+
+                    <TextField label="type" variant="outlined" fullWidth 
+                     helperText={'example: kg, minutes'}  onChange={(e)=> valueType = e.target.value}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.dialogClose} color="primary">
                         nah
                 </Button>
-                    <Button onClick={() => this.props.newGraph(category,graph)} disabled ={disabled}
+                    <Button onClick={() => this.props.newGraph(category,graph,valueType)} disabled ={disabled}
                     color="primary">
                         Create
                 </Button>

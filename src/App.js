@@ -8,6 +8,7 @@ const data = [{
   name: "games",
   graphs: [{
     name: "Roofcampers in rust",
+    type: "noobs",
     data: [{ x: new Date(2013, 1, 1), y: 140 },
     { x: new Date(1987, 1, 1), y: 12 },
     { x: new Date(1993, 1, 1), y: 14 },
@@ -19,6 +20,7 @@ const data = [{
   },
   {
     name: "Balanced matches in dota",
+    type: "matches",
     data: [{ x: new Date(2013, 1, 1), y: 400 },
     { x: new Date(1987, 1, 1), y: 320 },
     { x: new Date(1993, 1, 1), y: 280 },
@@ -34,6 +36,7 @@ const data = [{
   name: "ugh",
   graphs: [{
     name: "uga",
+    type: "meme",
     data: [{ x: new Date(2013, 1, 1), y: 140 },
     { x: new Date(1987, 1, 1), y: 12 },
     { x: new Date(1993, 1, 1), y: 14 },
@@ -45,6 +48,7 @@ const data = [{
   },
   {
     name: "dada",
+    type: "xd",
     data: [{ x: new Date(2013, 1, 1), y: 400 },
     { x: new Date(1987, 1, 1), y: 320 },
     { x: new Date(1993, 1, 1), y: 280 },
@@ -63,52 +67,41 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.first = data[0];
-    this.state = { current: { name: this.first.graphs[0].name, data: this.first.graphs[0].data, category: 0, graph: 0 } };
+    this.state = { current: { name: this.first.graphs[0].name,
+    type: this.first.graphs[0].type,
+    data: this.first.graphs[0].data, category: 0, graph: 0 } };
     this.onGraphChange = this.onGraphChange.bind(this);
     this.newValue= this.newValue.bind(this);
     this.newGraph= this.newGraph.bind(this);
   }
 
   componentDidMount() {
+    document.title="hehe";
   }
 
   newValue(date,value,category,graph){
-
-    // console.log(data[category]);
-    // console.log(data[category].graphs);
     data[category].graphs[graph].data.push({x: date, y: parseInt(value)});
-    this.setState({ current: { name: data[category].graphs[graph].name, data: data[category].graphs[graph].data,
+    this.setState({ current: { name: data[category].graphs[graph].name,
+    type: data[category].graphs[graph].type,
+    data: data[category].graphs[graph].data,
     category: category, graph: graph } });
-
-    console.log(data[category].graphs[graph]);
   }
 
-  newGraph(category,graph){
-    let newcategory = true;
-    let category_index=0;
-    let graph_index=0;
+  newGraph(category,graph,valueType){
+    let a = newGraphParse(category,graph,valueType)
+    let category_index = a.category_index;
+    let graph_index = a.graph_index;
 
-    data.map((obj,index)=>{
-        if(obj.name === category){
-            graph_index = data[index].graphs.length;
-            category_index  = index;
-            newcategory = false;
-            data[index].graphs.push({name: graph, data: []});
-        }
-    });
-
-    if(newcategory){
-        category_index = data.length;
-        let new_graph = [{name: graph, data: []}];
-        data.push({name: category, graphs: new_graph});
-    }
-    this.setState({ current: { name: data[category_index].graphs[graph_index].name, data: data[category_index].graphs[graph_index].data,
+    this.setState({ current: { name: data[category_index].graphs[graph_index].name,
+    type: data[category_index].graphs[graph_index].type,
+    data: data[category_index].graphs[graph_index].data,
     category: category_index, graph: graph_index } });
   }
 
   onGraphChange(category,graph) {
-    // console.log(category + '  WHY  '+graph);
-    this.setState({ current: { name: data[category].graphs[graph].name, data: data[category].graphs[graph].data, 
+    this.setState({ current: { name: data[category].graphs[graph].name,
+    type: data[category].graphs[graph].type,
+    data: data[category].graphs[graph].data, 
     category: category, graph: graph } });
   }
 
@@ -118,10 +111,35 @@ class App extends React.Component {
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
         <Content data={this.state.current.data} title={this.state.current.name} newValue={this.newValue} category={this.state.current.category}
-        graph={this.state.current.graph} />
+        graph={this.state.current.graph} valueType={this.state.current.type}/>
       </>
     );
   }
 }
 
 export default App;
+
+
+
+function newGraphParse(category,graph,valueType){
+  let newcategory = true;
+    let category_index=0;
+    let graph_index=0;
+
+    data.map((obj,index)=>{
+        if(obj.name === category){
+            graph_index = data[index].graphs.length;
+            category_index  = index;
+            newcategory = false;
+            data[index].graphs.push({name: graph, type: valueType, data: []});
+        }
+    });
+
+    if(newcategory){
+        category_index = data.length;
+        let new_graph = [{name: graph,type: valueType, data: []}];
+        data.push({name: category, graphs: new_graph});
+    }
+
+    return {category_index,graph_index};
+}

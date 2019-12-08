@@ -9,7 +9,7 @@ class Stats extends React.Component {
     render() {
         return (
             <div className='stats-area'>
-                <p> waw </p>
+                <p> hey </p>
             </div>
         );
     }

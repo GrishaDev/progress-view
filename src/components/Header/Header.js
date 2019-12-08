@@ -35,8 +35,8 @@ function Header(props) {
         setAnchorEl(null);
     };
 
-    function dialogDone(category,graph){
-        props.newGraph(category,graph);
+    function dialogDone(category,graph,valueType){
+        props.newGraph(category,graph,valueType);
         dialogClose();
     }
 
