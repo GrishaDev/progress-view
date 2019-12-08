@@ -63,12 +63,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.first = data[0];
-    this.state = { current: { name: this.first.graphs[0].name, data: this.first.graphs[0].data } };
+    this.state = { current: { name: this.first.graphs[0].name, data: this.first.graphs[0].data, category: 0, graph: 0 } };
     this.onGraphChange = this.onGraphChange.bind(this);
+    this.newValue= this.newValue.bind(this);
     this.newGraph= this.newGraph.bind(this);
   }
 
   componentDidMount() {
+  }
+
+  newValue(date,value,category,graph){
+
+    // console.log(data[category]);
+    // console.log(data[category].graphs);
+    data[category].graphs[graph].data.push({x: date, y: parseInt(value)});
+    this.setState({ current: { name: data[category].graphs[graph].name, data: data[category].graphs[graph].data,
+    category: category, graph: graph } });
+
+    console.log(data[category].graphs[graph]);
   }
 
   newGraph(category,graph){
@@ -90,23 +102,23 @@ class App extends React.Component {
         let new_graph = [{name: graph, data: []}];
         data.push({name: category, graphs: new_graph});
     }
-    console.log(category_index);
-    console.log(graph_index);
-    console.log(data[category_index].graphs[0]);
-
-    this.setState({ current: { name: data[category_index].graphs[graph_index].name, data: data[category_index].graphs[graph_index].data } });
+    this.setState({ current: { name: data[category_index].graphs[graph_index].name, data: data[category_index].graphs[graph_index].data,
+    category: category_index, graph: graph_index } });
   }
 
   onGraphChange(category,graph) {
     // console.log(category + '  WHY  '+graph);
-    this.setState({ current: { name: data[category].graphs[graph].name, data: data[category].graphs[graph].data } });
+    this.setState({ current: { name: data[category].graphs[graph].name, data: data[category].graphs[graph].data, 
+    category: category, graph: graph } });
   }
+
 
   render() {
     return (
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
-        <Content data={this.state.current.data} title={this.state.current.name}/>
+        <Content data={this.state.current.data} title={this.state.current.name} newValue={this.newValue} category={this.state.current.category}
+        graph={this.state.current.graph} />
       </>
     );
   }

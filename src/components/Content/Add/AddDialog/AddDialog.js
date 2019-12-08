@@ -8,15 +8,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
 
-let category='';
-let graph = '';
-let disabled = true;
+let value=0;
 
 export default class AddDialog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { };
+        this.state = { date: new Date()};
+        this.handleDateChange = this.handleDateChange.bind(this);
+    }
+
+    handleDateChange(date){
+        this.setState({date: date});
     }
 
     // error={this.state.graphError} helperText={this.state.graphHelper}  onChange={this.onChangeGraph.bind(this)}
@@ -30,16 +40,32 @@ export default class AddDialog extends React.Component {
                     <DialogContentText>
                         Add some value
                     </DialogContentText>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="time"
+                            value={this.state.date}
+                            fullWidth
+                            onChange={this.handleDateChange}
+                            style={{  padding: '0 0 30px 0' }}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                    </MuiPickersUtilsProvider>
 
-                    <TextField required label="Value" variant="outlined" fullWidth type="number"
-                    />
+                    <TextField required label="Value" variant="outlined" fullWidth type="number" onChange={(e)=> value = e.target.value}/>
 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.props.dialogClose} color="primary">
                         nah
                 </Button>
-                    <Button onClick={this.props.dialogClose} disabled ={disabled}
+                    <Button onClick={()=> this.props.newValue(this.state.date,value, this.props.category, this.props.graph)}
                     color="primary">
                         Add
                 </Button>

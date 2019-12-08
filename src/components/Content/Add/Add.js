@@ -17,13 +17,17 @@ export default function Add(props){
         setOpen(false);
     };
 
+    function dialogDone(date,value,category, graph){
+        props.newValue(date,value,category,graph);
+    }
 
     return (
         <div className="add-div">
             <Fab color="primary" aria-label="add" onClick={dialogClick}>
                 <AddIcon/>
             </Fab>
-            <AddDialog open={open} dialogClose={dialogClose} title={props.title}/>
+            <AddDialog open={open} dialogClose={dialogClose} title={props.title} newValue={dialogDone} category={props.category}
+            graph={props.graph} />
         </div>
     );
 }

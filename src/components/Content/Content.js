@@ -8,6 +8,7 @@ class Content extends React.Component {
         super(props);
     }
 
+
     render() {
         return (
             <>
@@ -15,7 +16,7 @@ class Content extends React.Component {
                 <Graph data={this.props.data}/>
                 <Stats/>
             </div>
-            <Add title={this.props.title}/>
+            <Add title={this.props.title} newValue={this.props.newValue} category={this.props.category} graph={this.props.graph}/>
             </>
         );
     }
