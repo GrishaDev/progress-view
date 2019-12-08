@@ -46,3 +46,9 @@
   margin: 0 auto;
   margin-top: 50px;
 }
+
+.add-div{
+  bottom: 0;
+  position: absolute;
+  padding: 30px;
+}

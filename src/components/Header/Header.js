@@ -35,9 +35,10 @@ function Header(props) {
         setAnchorEl(null);
     };
 
-    // function dialogDone(){
-        
-    // }
+    function dialogDone(category,graph){
+        props.newGraph(category,graph);
+        dialogClose();
+    }
 
     let menu_items=[];
     let categories = [];
@@ -70,7 +71,7 @@ function Header(props) {
                     </Typography>
                     <Button color="inherit" onClick={dialogClick}>Add</Button>
                     <Button color="inherit" onClick={handleClick}>Graphs</Button>
-                    <FormDialog open={open} dialogClose={dialogClose} categories={categories} newGraph={props.newGraph}/>
+                    <FormDialog open={open} dialogClose={dialogClose} categories={categories} newGraph={dialogDone}/>
                     <Menu
                         id="simple-menu"
                         anchorEl={anchorEl}

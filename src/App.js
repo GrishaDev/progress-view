@@ -106,7 +106,7 @@ class App extends React.Component {
     return (
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
-        <Content data={this.state.current.data} />
+        <Content data={this.state.current.data} title={this.state.current.name}/>
       </>
     );
   }
