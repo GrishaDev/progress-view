@@ -47,6 +47,10 @@
   margin-top: 50px;
 }
 
+.stats-area > p{
+  padding: 5px;
+}
+
 .add-div{
   bottom: 0;
   position: absolute;
