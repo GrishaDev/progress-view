@@ -3,9 +3,24 @@ import '../../../App.css';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
+// let label;
+
 class Stats extends React.Component {
     constructor(props) {
         super(props);
+        // gym(this.props.valueType);
+        this.getLabel = this.getLabel.bind(this);
+    }
+
+    // componentDidUpdate() {
+    //     console.log("hello? "+this.props.valueType)
+    //     gym(this.props.valueType);
+    // }
+
+    getLabel(){
+        if(this.props.gym)
+            return "volume";
+        return this.props.valueType;
     }
 
     render() {
@@ -13,7 +28,7 @@ class Stats extends React.Component {
             <div className='stats-area'>
                 <Typography variant="h6" className='header-title'>Stats:</Typography>
                 <Divider />
-                <p>Type: {this.props.valueType}</p>
+                <p>Type: {this.getLabel()}</p>
                 <p>Last: {this.props.data[this.props.data.length -1].y}</p>
                 <p>Highest: {getHighest(this.props.data)}</p>
                 <p>Lowest: {getLowest(this.props.data)}</p>
@@ -44,3 +59,10 @@ function getLowest(data){
 function getAverage(data){
     return data.reduce((r, c) => r + c.y, 0) / data.length;
 }
+
+// function gym(valueType){
+//     if(valueType === "gym")
+//         label = "volume";
+//     else
+//         label=valueType;
+// }

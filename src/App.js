@@ -67,7 +67,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.first = data[0];
-    
+
     this.state = { current: { name: this.first.graphs[0].name,
     type: this.first.graphs[0].type,
     data: this.first.graphs[0].data, category: 0, graph: 0 } };

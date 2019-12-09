@@ -27,7 +27,7 @@ export default function Add(props){
                 <AddIcon/>
             </Fab>
             <AddDialog open={open} dialogClose={dialogClose} title={props.title} newValue={dialogDone} category={props.category}
-            graph={props.graph} />
+            graph={props.graph} gym={props.gym}/>
         </div>
     );
 }

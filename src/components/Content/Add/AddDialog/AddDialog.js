@@ -32,6 +32,14 @@ export default class AddDialog extends React.Component {
     // error={this.state.graphError} helperText={this.state.graphHelper}  onChange={this.onChangeGraph.bind(this)}
 
     render() {
+
+        let extrafield;
+        if(this.props.gym){
+            console.log("gym");
+            extrafield = <TextField label="formula" variant="outlined" fullWidth onChange={(e)=> value = e.target.value}
+            style={{  margin: '30px 0 0 0' }} helperText='example: 20,8,3'/>
+        }
+
         return(
             <div>
             <Dialog open={this.props.open} onClose={this.props.dialogClose} aria-labelledby="form-dialog-title">
@@ -58,7 +66,8 @@ export default class AddDialog extends React.Component {
                         />
                     </MuiPickersUtilsProvider>
 
-                    <TextField required label="Value" variant="outlined" fullWidth type="number" onChange={(e)=> value = e.target.value}/>
+                    <TextField required label="Value" variant="outlined" fullWidth type="number" onChange={(e)=> value = e.target.value} />
+                    {extrafield}
 
                 </DialogContent>
                 <DialogActions>

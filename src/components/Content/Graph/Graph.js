@@ -2,11 +2,19 @@ import React from 'react';
 import '../../../App.css';
 import { VictoryZoomContainer, VictoryChart,VictoryLine,VictoryAxis } from 'victory'
 
+// let label;
+
 class Graph extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.getLabel = this.getLabel.bind(this);
+        // gym(this.props.valueType);
     }
+
+    // componentDidUpdate() {
+    //     gym(this.props.valueType);
+    // }
 
     handleZoom(domain) {
         this.setState({ selectedDomain: domain });
@@ -14,6 +22,13 @@ class Graph extends React.Component {
 
     handleBrush(domain) {
         this.setState({ zoomDomain: domain });
+    }
+
+
+    getLabel(){
+        if(this.props.gym)
+            return "volume";
+        return this.props.valueType;
     }
 
     render() {
@@ -41,7 +56,7 @@ class Graph extends React.Component {
 
                     <VictoryAxis dependentAxis
                         // theme={V.VictoryTheme.material}
-                        tickFormat={(t) => `${Math.round(t)} `+this.props.valueType}
+                        tickFormat={(t) => `${Math.round(t)} `+this.getLabel()}
                         fixLabelOverlap={true}
                         style={{ 
                             axis: {
@@ -73,3 +88,10 @@ class Graph extends React.Component {
 }
 
 export default Graph;
+
+// function gym(valueType){
+//     if(valueType === "gym")
+//         label = "volume";
+//     else
+//         label=valueType;
+// }
