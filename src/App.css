@@ -56,3 +56,8 @@
   position: absolute;
   padding: 30px;
 }
+
+.form-formula{
+  display: flex;
+  justify-content: center;
+}

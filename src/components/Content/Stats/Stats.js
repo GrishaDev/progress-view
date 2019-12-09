@@ -24,15 +24,16 @@ class Stats extends React.Component {
     }
 
     render() {
+
         return (
             <div className='stats-area'>
                 <Typography variant="h6" className='header-title'>Stats:</Typography>
                 <Divider />
                 <p>Type: {this.getLabel()}</p>
-                <p>Last: {this.props.data[this.props.data.length -1].y}</p>
-                <p>Highest: {getHighest(this.props.data)}</p>
-                <p>Lowest: {getLowest(this.props.data)}</p>
-                <p>Average: {getAverage(this.props.data)}</p>
+                <p>Last: {this.props.data[this.props.data.length -1].y} </p>
+                <p>Highest: {getHighest(this.props.data)} </p>
+                <p>Lowest: {getLowest(this.props.data)} </p>
+                <p>Average: {getAverage(this.props.data)} </p>
             </div>
         );
     }

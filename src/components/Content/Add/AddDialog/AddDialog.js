@@ -17,27 +17,61 @@ import {
 } from '@material-ui/pickers';
 
 let value=0;
+let weight,reps,sets = 0;
+let special = false;
+let special_data;
 
 export default class AddDialog extends React.Component {
     constructor(props) {
         super(props);
         this.state = { date: new Date()};
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleSpecialForm = this.handleSpecialForm.bind(this);
+        this.handleNormalForm = this.handleNormalForm.bind(this);
     }
 
     handleDateChange(date){
         this.setState({date: date});
     }
 
-    // error={this.state.graphError} helperText={this.state.graphHelper}  onChange={this.onChangeGraph.bind(this)}
+    handleSpecialForm(e){
+        let id = e.target.id;
+    }
+
+    handleNormalForm(e){
+        value = validateNumber(e.target.value)
+    }
+
+    onSubmit(){
+        if(this.props.gym)
+            validateSpecialForm();
+        
+        this.props.newValue(this.state.date,value, this.props.category, this.props.graph, special, special_data);
+    }
+    
 
     render() {
 
+        let extrafields =[];
         let extrafield;
         if(this.props.gym){
-            console.log("gym");
-            extrafield = <TextField label="formula" variant="outlined" fullWidth onChange={(e)=> value = e.target.value}
-            style={{  margin: '30px 0 0 0' }} helperText='example: 20,8,3'/>
+            extrafields.push( <TextField  key="annoyingshit1" label="weight(kg)" variant="outlined" type="number" id="weight"
+            onChange={(e)=> weight=e.target.value}
+            style={ {margin: '0 0 0 0',width: '25%'}} helperText='example: 20' /> );
+
+            extrafields.push( <TextField  key="annoyingshit2" label="reps" variant="outlined" type="number" id="reps"
+            onChange={(e)=> reps=e.target.value}
+            style={ {margin: '0 0 0 20px',width: '25%'}} helperText='example: 8' /> );
+
+            extrafields.push( <TextField   key="annoyingshit3 "label="sets" variant="outlined" type="number" id="sets"
+            onChange={(e)=> sets=e.target.value} 
+            style={  {margin: '0 0 0 20px',width: '25%'}} helperText='example: 3' /> );
+
+            extrafield = <div className="form-formula">{extrafields}</div>
+        }
+        else{
+        extrafield = <TextField style={{  padding: '0 0 0 0' }} required={!this.props.gym} label="Value" variant="outlined"
+        fullWidth type="number" onChange={this.handleNormalForm} />
         }
 
         return(
@@ -66,7 +100,6 @@ export default class AddDialog extends React.Component {
                         />
                     </MuiPickersUtilsProvider>
 
-                    <TextField required label="Value" variant="outlined" fullWidth type="number" onChange={(e)=> value = e.target.value} />
                     {extrafield}
 
                 </DialogContent>
@@ -74,7 +107,7 @@ export default class AddDialog extends React.Component {
                     <Button onClick={this.props.dialogClose} color="primary">
                         nah
                 </Button>
-                    <Button onClick={()=> this.props.newValue(this.state.date,value, this.props.category, this.props.graph)}
+                    <Button onClick={()=> this.onSubmit()}
                     color="primary">
                         Add
                 </Button>
@@ -83,4 +116,30 @@ export default class AddDialog extends React.Component {
             </div >
         );
     }
+}
+
+function validateNumber(num){
+    let value;
+    num = parseInt(num);
+
+    if(isNaN(num))
+        value=0
+    else
+        value=num;
+    return value;
+}
+
+function validateSpecialForm(){
+    weight = validateNumber(weight);
+    reps = validateNumber(reps);
+    sets = validateNumber(sets);
+
+    formula();
+    special=true;
+    special_data={weight: weight, reps: reps, sets: sets};
+}
+
+function formula()
+{
+    value = weight * reps * sets;
 }

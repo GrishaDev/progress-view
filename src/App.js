@@ -81,8 +81,12 @@ class App extends React.Component {
     document.title="hehe";
   }
 
-  newValue(date,value,category,graph){
-    data[category].graphs[graph].data.push({x: date, y: parseInt(value)});
+  newValue(date,value,category,graph, special, special_data){
+    if(!special)
+      data[category].graphs[graph].data.push({x: date, y: parseInt(value)});
+    else
+      data[category].graphs[graph].data.push({x: date, y: parseInt(value), special_data: special_data});
+
     this.setState({ current: { name: data[category].graphs[graph].name,
     type: data[category].graphs[graph].type,
     data: data[category].graphs[graph].data,

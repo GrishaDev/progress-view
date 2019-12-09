@@ -17,8 +17,8 @@ export default function Add(props){
         setOpen(false);
     };
 
-    function dialogDone(date,value,category, graph){
-        props.newValue(date,value,category,graph);
+    function dialogDone(date,value,category, graph, special, special_data){
+        props.newValue(date,value,category,graph, special, special_data);
     }
 
     return (
