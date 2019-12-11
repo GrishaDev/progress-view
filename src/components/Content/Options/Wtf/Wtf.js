@@ -7,26 +7,19 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
-export default function DataDialog(props) {
-
-    let fields=[];
-    props.data.map((o,ind)=>{
-        fields.push(<p key={ind}>{JSON.stringify(o)}</p>);
-    });
+export default function Wtf(props) {
 
     return (
         <Dialog open={props.open} onClose={props.dialogClose} aria-labelledby="form-dialog-title">
-            <DialogTitle>Raw data:</DialogTitle>
-            <DialogContent className="raw-data-area">
-                {fields}
-            </DialogContent>
+            <DialogTitle>Delete {props.title}?</DialogTitle>
             <DialogActions>
-                    <Button onClick={props.dialogClose} color="primary" className="raw">Leave</Button>
-                    {/* <Button onClick={()=> this.onSubmit()}
+                    <Button onClick={props.dialogClose} color="primary" className="raw">No</Button>
+                    <Button onClick={props.dialogDone}
                     color="primary">
-                        Add
-                </Button>  */}
+                        Delete
+                </Button> 
             </DialogActions>
         </Dialog>
     )
 }
+

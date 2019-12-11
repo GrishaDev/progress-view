@@ -3,7 +3,6 @@ import '../../../App.css';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import AddDialog from './AddDialog/AddDialog';
-import { getThemeProps } from '@material-ui/styles';
 
 export default function Add(props){
 
