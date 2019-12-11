@@ -1,6 +1,7 @@
 *{
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .header-root {
@@ -9,6 +10,11 @@
 
 .header-title{
   flex-grow: 1;
+}
+
+.logo-title{
+  flex-grow: 1;
+  visibility: visible;
 }
 
 .category-title{
@@ -60,4 +66,14 @@
 .form-formula{
   display: flex;
   justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .add-div {
+    padding: 10px;
+  }
+
+  .logo-title{
+    visibility: hidden;
+  }
 }

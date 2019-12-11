@@ -63,7 +63,7 @@ function Header(props) {
                     {/* <IconButton edge="start" className='header-button' color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton> */}
-                    <Typography variant="h6" className='header-title'>
+                    <Typography variant="h6" className='logo-title'>
                         Hey
                     </Typography>
                     <Typography variant="h6" className='header-title'>

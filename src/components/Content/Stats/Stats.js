@@ -3,19 +3,14 @@ import '../../../App.css';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 
-// let label;
+
+const weightType="kg";
 
 class Stats extends React.Component {
     constructor(props) {
         super(props);
-        // gym(this.props.valueType);
         this.getLabel = this.getLabel.bind(this);
     }
-
-    // componentDidUpdate() {
-    //     console.log("hello? "+this.props.valueType)
-    //     gym(this.props.valueType);
-    // }
 
     getLabel(){
         if(this.props.gym)
@@ -24,11 +19,6 @@ class Stats extends React.Component {
     }
 
     render() {
-
-        // let extrafield;
-        // if(this.props.data[this.props.data.length -1].special_data)
-        //     extrafield = JSON.stringify(this.props.data[this.props.data.length -1].special_data);
-        
         return (
             <div className='stats-area'>
                 <Typography variant="h6" className='header-title'>Stats:</Typography>
@@ -46,25 +36,30 @@ class Stats extends React.Component {
 export default Stats;
 
 
+function getDate(date){
+    return date.toLocaleDateString('en-gb');
+}
 
 function getExtra(index,data){
-    if(data[index].special_data)
-        return JSON.stringify(data[index].special_data);
-    return "";
+    let a = "";
+    if(data[index].special_data){
+        let thing = data[index].special_data;
+        a += " | weight: "+thing.weight+" "+weightType;
+        a += ", reps: "+ thing.reps;
+        a += ", sets: "+thing.sets;
+    }
+    // return JSON.stringify(data[index].special_data);
+    return a;
 }
 
 function getLast(data){
     let index = data.length -1;
-    return data[index].y + " "+getExtra(index,data);
+    return data[index].y + " at "+getDate(data[index].x)+" "+getExtra(index,data);
 }
 
 function getHighest(data){
     let index=0;
     let max=0;
-    // let a = Math.max.apply(Math, data.map(function(o,ind) {
-    //     index= ind;
-    //     return o.y;
-    // }))
 
     data.map(function(o,ind){
         if(o.y > max){
@@ -72,15 +67,12 @@ function getHighest(data){
             index = ind;
         }
     });
-    return max + " "+getExtra(index,data);
+    return max + " at "+getDate(data[index].x)+" "+getExtra(index,data);
 }
 
 function getLowest(data){
     let index=0;
     let lowest=data[0].y;
-    // let a = Math.min.apply(Math, data.map(function(o,ind) {
-    //     return o.y;
-    // }))
 
     data.map(function(o,ind){
         if(o.y < lowest){
@@ -88,16 +80,9 @@ function getLowest(data){
             index = ind;
         }
     });
-    return lowest + " "+getExtra(index,data);
+    return lowest + " at "+getDate(data[index].x)+" "+getExtra(index,data);
 }
 
 function getAverage(data){
     return data.reduce((r, c) => r + c.y, 0) / data.length;
 }
-
-// function gym(valueType){
-//     if(valueType === "gym")
-//         label = "volume";
-//     else
-//         label=valueType;
-// }
