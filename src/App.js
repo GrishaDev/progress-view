@@ -3,7 +3,6 @@ import './App.css';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
 
-
 const data = [{
   name: "games",
   graphs: [{
@@ -115,6 +114,7 @@ class App extends React.Component {
 
 
   render() {
+
     return (
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
