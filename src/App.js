@@ -91,6 +91,8 @@ class App extends React.Component {
     type: data[category].graphs[graph].type,
     data: data[category].graphs[graph].data,
     category: category, graph: graph } });
+
+    console.log(data);
   }
 
   newGraph(category,graph,valueType){

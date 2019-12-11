@@ -25,12 +25,16 @@ class Stats extends React.Component {
 
     render() {
 
+        // let extrafield;
+        // if(this.props.data[this.props.data.length -1].special_data)
+        //     extrafield = JSON.stringify(this.props.data[this.props.data.length -1].special_data);
+        
         return (
             <div className='stats-area'>
                 <Typography variant="h6" className='header-title'>Stats:</Typography>
                 <Divider />
                 <p>Type: {this.getLabel()}</p>
-                <p>Last: {this.props.data[this.props.data.length -1].y} </p>
+                <p>Last: {getLast(this.props.data)}</p>
                 <p>Highest: {getHighest(this.props.data)} </p>
                 <p>Lowest: {getLowest(this.props.data)} </p>
                 <p>Average: {getAverage(this.props.data)} </p>
@@ -42,19 +46,49 @@ class Stats extends React.Component {
 export default Stats;
 
 
-function getHighest(data){
-    let a = Math.max.apply(Math, data.map(function(o) {
-        return o.y;
-    }))
 
-    return a;
+function getExtra(index,data){
+    if(data[index].special_data)
+        return JSON.stringify(data[index].special_data);
+    return "";
+}
+
+function getLast(data){
+    let index = data.length -1;
+    return data[index].y + " "+getExtra(index,data);
+}
+
+function getHighest(data){
+    let index=0;
+    let max=0;
+    // let a = Math.max.apply(Math, data.map(function(o,ind) {
+    //     index= ind;
+    //     return o.y;
+    // }))
+
+    data.map(function(o,ind){
+        if(o.y > max){
+            max = o.y;
+            index = ind;
+        }
+    });
+    return max + " "+getExtra(index,data);
 }
 
 function getLowest(data){
-    let a = Math.min.apply(Math, data.map(function(o) {
-        return o.y;
-    }))
-    return a;
+    let index=0;
+    let lowest=data[0].y;
+    // let a = Math.min.apply(Math, data.map(function(o,ind) {
+    //     return o.y;
+    // }))
+
+    data.map(function(o,ind){
+        if(o.y < lowest){
+            lowest = o.y;
+            index = ind;
+        }
+    });
+    return lowest + " "+getExtra(index,data);
 }
 
 function getAverage(data){

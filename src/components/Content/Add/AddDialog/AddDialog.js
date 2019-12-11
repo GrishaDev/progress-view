@@ -45,6 +45,10 @@ export default class AddDialog extends React.Component {
     onSubmit(){
         if(this.props.gym)
             validateSpecialForm();
+        else{
+            special = false;
+            special_data = {};
+        }
         
         this.props.newValue(this.state.date,value, this.props.category, this.props.graph, special, special_data);
     }
