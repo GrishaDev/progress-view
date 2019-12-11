@@ -4,7 +4,7 @@ import Graph from './Graph/Graph';
 import Stats from './Stats/Stats';
 import Add from './Add/Add'
 import Divider from '@material-ui/core/Divider';
-
+import Options from './Options/Options'
 
 class Content extends React.Component {
     constructor(props) {
@@ -25,6 +25,7 @@ class Content extends React.Component {
             <>
             <div className='content'>
                 <Graph data={this.props.data} valueType={this.props.valueType} gym={ this.isGym() }/>
+                <Options delete={this.props.delete}/>
                 {stats}
             </div>
             <Add title={this.props.title} newValue={this.props.newValue} category={this.props.category}

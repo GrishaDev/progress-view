@@ -74,6 +74,7 @@ class App extends React.Component {
     this.onGraphChange = this.onGraphChange.bind(this);
     this.newValue= this.newValue.bind(this);
     this.newGraph= this.newGraph.bind(this);
+    this.delete= this.delete.bind(this);
   }
 
   componentDidMount() {
@@ -112,14 +113,27 @@ class App extends React.Component {
     category: category, graph: graph } });
   }
 
+  delete(){
+    let cat = this.state.current.category;
+    let grf = this.state.current.graph;
+    data[cat].graphs.splice(grf,1);
+    if(data[cat].graphs.length === 0)
+      data.splice(cat,1);
+    
+    console.log(data);
+    let first = data[0];
+    this.setState( { current: { name: first.graphs[0].name,
+      type: first.graphs[0].type,
+      data: first.graphs[0].data, category: 0, graph: 0 } });
 
+  }
   render() {
 
     return (
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
         <Content data={this.state.current.data} title={this.state.current.name} newValue={this.newValue} category={this.state.current.category}
-        graph={this.state.current.graph} valueType={this.state.current.type}/>
+        graph={this.state.current.graph} valueType={this.state.current.type} delete={this.delete}/>
       </>
     );
   }

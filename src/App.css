@@ -43,13 +43,20 @@
   justify-content: center;
 }
 
+.options{
+  width: 50%;
+  margin: 0 auto;
+  min-width: 500px;
+  /* background-color: yellow; */
+}
+
 .stats-area{
   height: 200px;
   width: 50%;
   min-width: 500px;
   /* background-color: yellow; */
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 10;
 }
 
 .stats-area > p{
@@ -67,12 +74,18 @@
   justify-content: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 300px) {
   .add-div {
     padding: 10px;
   }
 
   .logo-title{
     visibility: hidden;
+  }
+
+  .raw{
+    bottom: 0;
+    left: 0;
+    position: absolute;
   }
 }

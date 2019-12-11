@@ -2,7 +2,8 @@ import React from 'react';
 import '../../../App.css';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-
+import Button from '@material-ui/core/Button';
+import DataDialog from './DataDialog/DataDialog'
 
 const weightType="kg";
 
@@ -10,7 +11,16 @@ class Stats extends React.Component {
     constructor(props) {
         super(props);
         this.getLabel = this.getLabel.bind(this);
+        this.state = {open: false};
     }
+
+    dialogClick = () => {
+        this.setState({open:true});
+     }; 
+ 
+     dialogClose = () => {
+        this.setState({open:false});
+     };
 
     getLabel(){
         if(this.props.gym)
@@ -28,6 +38,8 @@ class Stats extends React.Component {
                 <p>Highest: {getHighest(this.props.data)} </p>
                 <p>Lowest: {getLowest(this.props.data)} </p>
                 <p>Average: {getAverage(this.props.data)} </p>
+                <Button color="primary" variant="contained" onClick={this.dialogClick}>Raw Data</Button>
+                <DataDialog open={this.state.open} dialogClose={this.dialogClose} title={this.props.title} data={this.props.data}/>
             </div>
         );
     }
