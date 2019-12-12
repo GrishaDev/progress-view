@@ -39,7 +39,8 @@ class Stats extends React.Component {
                 <p>Lowest: {getLowest(this.props.data)} </p>
                 <p>Average: {getAverage(this.props.data)} </p>
                 <Button color="primary" variant="contained" onClick={this.dialogClick}>Raw Data</Button>
-                <DataDialog open={this.state.open} dialogClose={this.dialogClose} title={this.props.title} data={this.props.data}/>
+                <DataDialog open={this.state.open} dialogClose={this.dialogClose} title={this.props.title} data={this.props.data}
+                 graphUpdate={this.props.graphUpdate}/>
             </div>
         );
     }

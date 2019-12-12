@@ -18,7 +18,7 @@ class Content extends React.Component {
 
         let stats = <div className='stats-area'>Add some values to graph</div>
         if(this.props.data.length > 0)
-            stats = <Stats valueType={this.props.valueType} data={this.props.data} gym={ this.isGym() }/>;
+            stats = <Stats valueType={this.props.valueType} data={this.props.data} gym={ this.isGym() } graphUpdate={this.props.graphUpdate}/>;
         
         return (
             <>

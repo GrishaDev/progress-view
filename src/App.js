@@ -75,10 +75,11 @@ class App extends React.Component {
     this.newValue= this.newValue.bind(this);
     this.newGraph= this.newGraph.bind(this);
     this.delete= this.delete.bind(this);
+    this.graphUpdate= this.graphUpdate.bind(this);
   }
 
   componentDidMount() {
-    document.title="hehe";
+    document.title="Hey";
   }
 
   newValue(date,value,category,graph, special, special_data){
@@ -120,28 +121,43 @@ class App extends React.Component {
     if(data[cat].graphs.length === 0)
       data.splice(cat,1);
     
-    console.log(data);
     let first = data[0];
     this.setState( { current: { name: first.graphs[0].name,
       type: first.graphs[0].type,
       data: first.graphs[0].data, category: 0, graph: 0 } });
-
   }
-  render() {
 
+  graphUpdate(graph){
+    let parsed
+    try{
+      parsed = JSON.parse(graph);
+    } catch(e){
+      console.log("Invalid json from raw data option. >> "+e)
+      return;
+    }
+    parsed.map(o =>{
+      o.x = new Date(o.x);
+    })
+    let cat = this.state.current.category;
+    let grf = this.state.current.graph;
+    data[cat].graphs[grf].data = parsed;
+    let current = data[cat].graphs[grf];
+
+    this.setState( { current: { name: current.name, type: current.type, data: parsed, category: cat, graph: grf } });
+  }
+
+  render() {
     return (
       <>
         <Header title={this.state.current.name} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
         <Content data={this.state.current.data} title={this.state.current.name} newValue={this.newValue} category={this.state.current.category}
-        graph={this.state.current.graph} valueType={this.state.current.type} delete={this.delete}/>
+        graph={this.state.current.graph} valueType={this.state.current.type} delete={this.delete} graphUpdate={this.graphUpdate}/>
       </>
     );
   }
 }
 
 export default App;
-
-
 
 function newGraphParse(category,graph,valueType){
   let newcategory = true;
