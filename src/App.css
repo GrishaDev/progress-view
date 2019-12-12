@@ -77,6 +77,58 @@
   justify-content: center;
 }
 
+
+
+
+
+
+/* -----------------login -----------------*/
+
+.login-page{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.login-paper{
+  /* display: flex;
+  justify-content: center; */
+  width: 30%;
+  min-width: 300px;
+  /* margin-top: 25%; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  padding: 20px;
+  /* margin: auto; */
+}
+
+.login-title{
+  display: flex;
+  justify-content: center; 
+  /* background-color: blue; */
+  width: 100%;
+  padding-top: 20px;
+}
+
+.login-content{
+  margin: 0 auto;
+  /* background-color: yellow; */
+  width: 50%;
+  padding-top: 20px;
+}
+
+.login-actions{
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  padding-top: 20px;
+}
+
+
+
 @media only screen and (max-width: 300px) {
   .add-div {
     padding: 10px;
