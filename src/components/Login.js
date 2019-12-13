@@ -3,16 +3,20 @@ import '../App.css';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 let name;
 export default function Login(props) {
 
     const [disabled, setDisabled] = React.useState(true);
 
-    function componentDidMount(){
-        document.title="Hey";
-    }
+    // function componentDidMount(){
+    //     document.title="Hey";
+    // }
 
+    React.useEffect(()=>{
+        document.title="Login";
+    })
     function onInput(e){
         name = e.target.value;
         if(name.length === 0)
@@ -21,9 +25,17 @@ export default function Login(props) {
             setDisabled(false);
     }
 
-    function submitHandle(){
-        console.log(name);
-        window.location.href='/app';
+    async function submitHandle(){
+        try{
+            let res = await axios.post('/api/auth',{user: name});
+            if(res.status)
+                window.location.href='/app';
+            else
+                alert("error");
+        }
+        catch{
+            alert("error");
+        }
     }
 
     return (
