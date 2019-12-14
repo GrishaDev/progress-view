@@ -27,7 +27,7 @@ class Graph extends React.Component {
 
     getLabel(){
         if(this.props.gym)
-            return "volume";
+            return "str";
         return this.props.valueType;
     }
 

@@ -12,11 +12,11 @@ let graph;
 export default function DataDialog(props) {
 
     const [disabled, setDisabled] = React.useState(true);
-    const [data, setData] = React.useState(JSON.stringify(props.data,null,4));
+    // const [data, setData] = React.useState(JSON.stringify(props.data,null,4));
 
     function onInput(e){
         graph = e.target.value;
-        setData(graph);
+        // setData(graph);
 
         if(graph.length === 0)
             setDisabled(true);
@@ -48,7 +48,8 @@ export default function DataDialog(props) {
                     multiline={true}
                     rows={9}
                     rowsMax={15}
-                    value={data}
+                    // value={data}
+                    defaultValue={JSON.stringify(props.data,null,4)}
                     fullWidth
                     helperText="Change at your own risk"
                     onChange={onInput}

@@ -71,7 +71,7 @@ export default class FormDialog extends React.Component {
             <div>
             <Dialog open={this.props.open} onClose={this.props.dialogClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Add graph</DialogTitle>
-                <DialogContent>
+                <DialogContent className="graph-add-content">
                     <DialogContentText>
                         Make a new graph
                     </DialogContentText>

@@ -71,13 +71,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // if(data.length > 0){
-    //   this.first = data[0];
+    if(data.length > 0){
+      this.first = data[0];
 
-    //   this.state = { current: { name: this.first.graphs[0].name,
-    //   type: this.first.graphs[0].type,
-    //   data: this.first.graphs[0].data, category: 0, graph: 0 } };
-    // }
+      this.state = { current: { name: this.first.graphs[0].name,
+      type: this.first.graphs[0].type,
+      data: this.first.graphs[0].data, category: 0, graph: 0 } };
+
+    }
+    else
+      this.state = { };
 
     this.onGraphChange = this.onGraphChange.bind(this);
     this.newValue= this.newValue.bind(this);
@@ -87,16 +90,24 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    await getData();
+    let a = await getData();
+    data = a;
+
+    data.map(c =>{
+      c.graphs.map(g=> {
+        g.data.map( o=>{
+          o.x = new Date(o.x);
+        })
+      })
+    })
 
     if(data.length > 0){
       this.first = data[0];
 
-      this.state = { current: { name: this.first.graphs[0].name,
+      this.setState ({ current: { name: this.first.graphs[0].name,
       type: this.first.graphs[0].type,
-      data: this.first.graphs[0].data, category: 0, graph: 0 } };
+      data: this.first.graphs[0].data, category: 0, graph: 0 } });
     }
-
     document.title="Progress View";
   }
 
@@ -113,7 +124,6 @@ class App extends React.Component {
     data: data[category].graphs[graph].data,
     category: category, graph: graph } });
 
-    console.log(data);
   }
 
   async newGraph(category,graph,valueType){
@@ -161,7 +171,6 @@ class App extends React.Component {
     try{
       parsed = JSON.parse(graph);
     } catch(e){
-      console.log("Invalid json from raw data option. >> "+e)
       return;
     }
     parsed.map(o =>{
@@ -181,9 +190,7 @@ class App extends React.Component {
 
     let content = <Nothing/>;
     let header = <Header title={""} onGraphChange={this.onGraphChange} data={data} newGraph={this.newGraph}/>
-    console.log("================================");
-    console.log(data);
-    console.log("================================");
+
     if(data.length > 0){
       content = <Content data={this.state.current.data} title={this.state.current.name} newValue={this.newValue} category={this.state.current.category}
       graph={this.state.current.graph} valueType={this.state.current.type} delete={this.delete} graphUpdate={this.graphUpdate}/>
@@ -227,9 +234,10 @@ function newGraphParse(category,graph,valueType){
 
 async function getData(){
     try{
-      let res = await axios.get('/api/');
-      if(res.status)
-          return res.data;
+      let res = await axios.get('/api');
+      if(res.status){
+          return res.data.data;
+      }
       else
           alert("error");
   }
@@ -241,9 +249,10 @@ async function getData(){
 
 async function saveData(data){
   try{
-    let res = await axios.post('/api/',{data:data});
-    if(res.status)
-        console.log(res.msg);
+    let res = await axios.post('/api/update',{data:data});
+    if(res.status){
+        console.log(res.data.msg);
+    }
     else
         alert("error");
   }

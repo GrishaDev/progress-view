@@ -5,18 +5,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
-let name;
+let name='';
+
 export default function Login(props) {
 
     const [disabled, setDisabled] = React.useState(true);
 
-    // function componentDidMount(){
-    //     document.title="Hey";
-    // }
-
     React.useEffect(()=>{
         document.title="Login";
     })
+    
     function onInput(e){
         name = e.target.value;
         if(name.length === 0)
@@ -25,6 +23,11 @@ export default function Login(props) {
             setDisabled(false);
     }
 
+    function keyPress(e){
+        if(e.keyCode === 13 && name.length > 0){
+            submitHandle();
+         }
+    }
     async function submitHandle(){
         try{
             let res = await axios.post('/api/auth',{user: name});
@@ -42,7 +45,7 @@ export default function Login(props) {
         <div className="login-page">
             <Paper className={'login-paper'}>
                 <div className='login-content'>
-                    <TextField label="Name" variant="outlined" fullWidth onChange={onInput} autoFocus/>
+                    <TextField label="Name" variant="outlined" fullWidth onKeyDown={keyPress} onChange={onInput} autoFocus/>
                 </div>
                 <div className='login-actions'>
                     <Button variant="contained"  color="primary" disabled={disabled} onClick={submitHandle}>Enter</Button>

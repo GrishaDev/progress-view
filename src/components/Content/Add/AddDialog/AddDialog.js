@@ -24,7 +24,7 @@ export default class AddDialog extends React.Component {
         super(props);
         this.state = { date: new Date()};
         this.handleDateChange = this.handleDateChange.bind(this);
-        this.handleSpecialForm = this.handleSpecialForm.bind(this);
+        // this.handleSpecialForm = this.handleSpecialForm.bind(this);
         this.handleNormalForm = this.handleNormalForm.bind(this);
     }
 
@@ -32,9 +32,9 @@ export default class AddDialog extends React.Component {
         this.setState({date: date});
     }
 
-    handleSpecialForm(e){
-        let id = e.target.id;
-    }
+    // handleSpecialForm(e){
+    //     let id = e.target.id;
+    // }
 
     handleNormalForm(e){
         value = validateNumber(e.target.value)
@@ -143,5 +143,12 @@ function validateSpecialForm(){
 
 function formula()
 {
-    value = weight * reps * sets;
+    console.log(reps);
+    if(reps === 0){
+        value=0;
+        return;
+    }
+    console.log("i leave");
+    // value = weight * reps * sets;
+    value = (weight * ((reps/30)+1)) * sets;
 }

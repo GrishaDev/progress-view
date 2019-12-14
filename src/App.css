@@ -12,12 +12,22 @@ body{
 }
 
 .header-title{
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
 }
 
 .logo-title{
   flex-grow: 1;
   visibility: visible;
+}
+
+.leave{
+  /* flex-grow: 1 */
+}
+
+.leave:hover{
+  color: red;
 }
 
 .category-title{
@@ -39,7 +49,7 @@ body{
 .graph-area{
   /* height: 400px; */
   width: 50%;
-  min-width: 500px;
+  min-width: 400px;
   /* background-color: green; */
   margin: 0 auto;
   display: flex;
@@ -50,17 +60,17 @@ body{
 .options{
   width: 50%;
   margin: 0 auto;
-  min-width: 500px;
+  min-width: 400px;
   /* background-color: yellow; */
 }
 
 .stats-area{
   height: 200px;
   width: 50%;
-  min-width: 500px;
+  min-width: 400px;
   /* background-color: yellow; */
   margin: 0 auto;
-  margin-top: 10;
+  /* margin-top: 10; */
 }
 
 .stats-area > p{
@@ -82,7 +92,9 @@ body{
   justify-content: center;
 }
 
-
+.graph-add-content{
+  overflow-y: auto;
+}
 
 
 
@@ -142,9 +154,11 @@ body{
   align-content: center;
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 700px) {
   .add-div {
+    position: absolute;
     padding: 10px;
+    right: 0;
   }
 
   .logo-title{
