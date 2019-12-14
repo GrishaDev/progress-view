@@ -6,65 +6,65 @@ import axios from 'axios';
 import Nothing from './components/Nothing'
 
 
-// let data = [];
+let data = [];
 
-let data = [{
-  name: "games",
-  graphs: [{
-    name: "Roofcampers in rust",
-    type: "noobs",
-    data: [{ x: new Date(2013, 1, 1), y: 140 },
-    { x: new Date(1987, 1, 1), y: 12 },
-    { x: new Date(1993, 1, 1), y: 14 },
-    { x: new Date(1997, 1, 1), y: 18 },
-    { x: new Date(2001, 1, 1), y: 52 },
-    { x: new Date(2005, 1, 1), y: 80 },
-    { x: new Date(2011, 1, 1), y: 150 },
-    { x: new Date(2015, 1, 1), y: 170 }]
-  },
-  {
-    name: "Balanced matches in dota",
-    type: "matches",
-    data: [{ x: new Date(2013, 1, 1), y: 400 },
-    { x: new Date(1987, 1, 1), y: 320 },
-    { x: new Date(1993, 1, 1), y: 280 },
-    { x: new Date(1997, 1, 1), y: 150 },
-    { x: new Date(2001, 1, 1), y: 210 },
-    { x: new Date(2005, 1, 1), y: 120 },
-    { x: new Date(2011, 1, 1), y: 80 },
-    { x: new Date(2015, 1, 1), y: 2 }]
-  }
-  ]
-},
-{
-  name: "ugh",
-  graphs: [{
-    name: "uga",
-    type: "meme",
-    data: [{ x: new Date(2013, 1, 1), y: 140 },
-    { x: new Date(1987, 1, 1), y: 12 },
-    { x: new Date(1993, 1, 1), y: 14 },
-    { x: new Date(1997, 1, 1), y: 18 },
-    { x: new Date(2001, 1, 1), y: 52 },
-    { x: new Date(2005, 1, 1), y: 80 },
-    { x: new Date(2011, 1, 1), y: 150 },
-    { x: new Date(2015, 1, 1), y: 170 }]
-  },
-  {
-    name: "dada",
-    type: "xd",
-    data: [{ x: new Date(2013, 1, 1), y: 400 },
-    { x: new Date(1987, 1, 1), y: 320 },
-    { x: new Date(1993, 1, 1), y: 280 },
-    { x: new Date(1997, 1, 1), y: 150 },
-    { x: new Date(2001, 1, 1), y: 210 },
-    { x: new Date(2005, 1, 1), y: 120 },
-    { x: new Date(2011, 1, 1), y: 80 },
-    { x: new Date(2015, 1, 1), y: 2 }]
-  }
-  ]
-}
-]
+// let data = [{
+//   name: "games",
+//   graphs: [{
+//     name: "Roofcampers in rust",
+//     type: "noobs",
+//     data: [{ x: new Date(2013, 1, 1), y: 140 },
+//     { x: new Date(1987, 1, 1), y: 12 },
+//     { x: new Date(1993, 1, 1), y: 14 },
+//     { x: new Date(1997, 1, 1), y: 18 },
+//     { x: new Date(2001, 1, 1), y: 52 },
+//     { x: new Date(2005, 1, 1), y: 80 },
+//     { x: new Date(2011, 1, 1), y: 150 },
+//     { x: new Date(2015, 1, 1), y: 170 }]
+//   },
+//   {
+//     name: "Balanced matches in dota",
+//     type: "matches",
+//     data: [{ x: new Date(2013, 1, 1), y: 400 },
+//     { x: new Date(1987, 1, 1), y: 320 },
+//     { x: new Date(1993, 1, 1), y: 280 },
+//     { x: new Date(1997, 1, 1), y: 150 },
+//     { x: new Date(2001, 1, 1), y: 210 },
+//     { x: new Date(2005, 1, 1), y: 120 },
+//     { x: new Date(2011, 1, 1), y: 80 },
+//     { x: new Date(2015, 1, 1), y: 2 }]
+//   }
+//   ]
+// },
+// {
+//   name: "ugh",
+//   graphs: [{
+//     name: "uga",
+//     type: "meme",
+//     data: [{ x: new Date(2013, 1, 1), y: 140 },
+//     { x: new Date(1987, 1, 1), y: 12 },
+//     { x: new Date(1993, 1, 1), y: 14 },
+//     { x: new Date(1997, 1, 1), y: 18 },
+//     { x: new Date(2001, 1, 1), y: 52 },
+//     { x: new Date(2005, 1, 1), y: 80 },
+//     { x: new Date(2011, 1, 1), y: 150 },
+//     { x: new Date(2015, 1, 1), y: 170 }]
+//   },
+//   {
+//     name: "dada",
+//     type: "xd",
+//     data: [{ x: new Date(2013, 1, 1), y: 400 },
+//     { x: new Date(1987, 1, 1), y: 320 },
+//     { x: new Date(1993, 1, 1), y: 280 },
+//     { x: new Date(1997, 1, 1), y: 150 },
+//     { x: new Date(2001, 1, 1), y: 210 },
+//     { x: new Date(2005, 1, 1), y: 120 },
+//     { x: new Date(2011, 1, 1), y: 80 },
+//     { x: new Date(2015, 1, 1), y: 2 }]
+//   }
+//   ]
+// }
+// ]
 
 
 class App extends React.Component {
@@ -90,24 +90,24 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    // let a = await getData();
-    // data = a;
+    let a = await getData();
+    data = a;
 
-    // data.map(c =>{
-    //   c.graphs.map(g=> {
-    //     g.data.map( o=>{
-    //       o.x = new Date(o.x);
-    //     })
-    //   })
-    // })
+    data.map(c =>{
+      c.graphs.map(g=> {
+        g.data.map( o=>{
+          o.x = new Date(o.x);
+        })
+      })
+    })
 
-    // if(data.length > 0){
-    //   this.first = data[0];
+    if(data.length > 0){
+      this.first = data[0];
 
-    //   this.setState ({ current: { name: this.first.graphs[0].name,
-    //   type: this.first.graphs[0].type,
-    //   data: this.first.graphs[0].data, category: 0, graph: 0 } });
-    // }
+      this.setState ({ current: { name: this.first.graphs[0].name,
+      type: this.first.graphs[0].type,
+      data: this.first.graphs[0].data, category: 0, graph: 0 } });
+    }
     document.title="Progress View";
   }
 
