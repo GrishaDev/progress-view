@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../App.css';
-import { VictoryZoomContainer, VictoryChart,VictoryLine,VictoryAxis } from 'victory'
+import { VictoryChart,VictoryLine,VictoryAxis,VictoryVoronoiContainer,VictoryTooltip } from 'victory'
 
 // let label;
 
@@ -31,6 +31,13 @@ class Graph extends React.Component {
         return this.props.valueType;
     }
 
+    getLineLabel(datum){
+        // let a = ''; 
+        // if(datum.datum.special_data)
+        //     a = ` | ${JSON.stringify(datum.datum.special_data)}`;
+        return `y: ${datum.datum.y}`;
+    }
+
     render() {
         return (
             <div className='graph-area'>
@@ -39,6 +46,12 @@ class Graph extends React.Component {
                     onLoad: { duration: 500 }
                     }}
                     padding={{ left: 90, top: 50, right: 20, bottom: 50 }}
+                    containerComponent={
+                        <VictoryVoronoiContainer voronoiDimension="x"
+                          labels={this.getLineLabel}
+                          labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{fill: "white"}}/>}
+                        />
+                      }
                     // containerComponent={
                     //     <VictoryZoomContainer responsive={true}
                     //         zoomDimension="x"

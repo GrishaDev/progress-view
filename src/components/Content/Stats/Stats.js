@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../App.css';
 import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DataDialog from './DataDialog/DataDialog'
 
@@ -31,7 +30,7 @@ class Stats extends React.Component {
     render() {
         return (
             <div className='stats-area'>
-                <Typography variant="h6" className='header-title'>Stats:</Typography>
+                {/* <Typography variant="h6" className='header-title'>Stats:</Typography> */}
                 <Divider />
                 <p>Type: {this.getLabel()}</p>
                 <p>Last: {getLast(this.props.data)}</p>
