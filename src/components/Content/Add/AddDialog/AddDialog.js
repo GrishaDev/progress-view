@@ -13,19 +13,27 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 
 let value=0;
-let weight,reps,sets = 0;
+let weight = [];
+let reps = [];
 let special = false;
 let special_data;
 
 export default class AddDialog extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { date: new Date()};
+        weight.push(0);
+        reps.push(0);
+
+        this.state = { date: new Date(), sets: 1};
         this.handleDateChange = this.handleDateChange.bind(this);
         // this.handleSpecialForm = this.handleSpecialForm.bind(this);
         this.handleNormalForm = this.handleNormalForm.bind(this);
+        this.addSet = this.addSet.bind(this);
+        this.removeSet = this.removeSet.bind(this);
     }
 
     handleDateChange(date){
@@ -51,29 +59,55 @@ export default class AddDialog extends React.Component {
         this.props.newValue(this.state.date,value, this.props.category, this.props.graph, special, special_data);
     }
     
+    addSet(){
+        this.setState({sets: this.state.sets + 1})
+        weight.push(0);
+        reps.push(0);
+    }
+    removeSet(){
+        if(this.state.sets > 1){
+            this.setState({sets: this.state.sets - 1})
+            weight.pop();
+            reps.pop();
+        }
+
+    }
 
     render() {
 
         let extrafields =[];
-        let extrafield;
+        let extrafield=[];
         if(this.props.gym){
-            extrafields.push( <TextField  key="annoyingshit1" label="weight(kg)" variant="outlined" type="number" id="weight"
-            onChange={(e)=> weight=e.target.value}
-            style={ {margin: '0 0 0 0',width: '25%'}} helperText='example: 20' /> );
+            extrafield.push( 
+            <div key="stfu" className="ihatecss">
+                <div className="ihatecss2" onClick={this.addSet}>
+                    <AddIcon style={{ fontSize: 50 }}/>
+                </div>
+                <div className="ihatecss3" onClick={this.removeSet}>
+                    <RemoveIcon style={{ fontSize: 50 }}/>
+                </div> 
+            </div>)
 
-            extrafields.push( <TextField  key="annoyingshit2" label="reps" variant="outlined" type="number" id="reps"
-            onChange={(e)=> reps=e.target.value}
-            style={ {margin: '0 0 0 20px',width: '25%'}} helperText='example: 8' /> );
+            for(let i=0; i<this.state.sets; i++){
+                extrafields.push( <TextField  key={"annoyingshit1"+String(i)} label="weight" variant="outlined" type="number" id="weight"
+                onChange={(e)=> weight[i]=e.target.value}
+                style={ {margin: '0 0 0 0',width: '25%'}} helperText='example: 20' /> );
 
-            extrafields.push( <TextField   key="annoyingshit3 "label="sets" variant="outlined" type="number" id="sets"
-            onChange={(e)=> sets=e.target.value} 
-            style={  {margin: '0 0 0 20px',width: '25%'}} helperText='example: 3' /> );
+                extrafields.push( <TextField  key={"annoyingshit2"+String(i)} label="reps" variant="outlined" type="number" id="reps"
+                onChange={(e)=> reps[i]=e.target.value}
+                style={ {margin: '0 0 0 20px',width: '25%'}} helperText='example: 8' /> );
 
-            extrafield = <div className="form-formula">{extrafields}</div>
+                // extrafields.push( <TextField   key="annoyingshit3 "label="sets" variant="outlined" type="number" id="sets"
+                // onChange={(e)=> sets=e.target.value} 
+                // style={  {margin: '0 0 0 20px',width: '25%'}} helperText='example: 3' /> );
+
+                extrafield.push( <div key={"annoyingshit3"+String(i)} className="form-formula">{extrafields}</div>);
+                extrafields =[];
+            }
         }
         else{
-        extrafield = <TextField style={{  padding: '0 0 0 0' }} required={!this.props.gym} label="Value" variant="outlined"
-        fullWidth type="number" onChange={this.handleNormalForm} />
+        extrafield.push(<TextField key={"annoyingshit4"}  style={{  padding: '0 0 0 0' }} required={!this.props.gym} label="Value" variant="outlined"
+        fullWidth type="number" onChange={this.handleNormalForm} />);
         }
 
         return(
@@ -101,7 +135,6 @@ export default class AddDialog extends React.Component {
                             }}
                         />
                     </MuiPickersUtilsProvider>
-
                     {extrafield}
 
                 </DialogContent>
@@ -122,8 +155,8 @@ export default class AddDialog extends React.Component {
 
 function validateNumber(num){
     let value;
-    num = parseInt(num);
-
+    num = parseFloat(num);
+    num = Math.round(num * 100) / 100
     if(isNaN(num))
         value=0
     else
@@ -132,23 +165,45 @@ function validateNumber(num){
 }
 
 function validateSpecialForm(){
-    weight = validateNumber(weight);
-    reps = validateNumber(reps);
-    sets = validateNumber(sets);
+    // weight = validateNumber(weight);
+    // reps = validateNumber(reps);
+    // sets = validateNumber(sets);
 
     formula();
     special=true;
-    special_data={weight: weight, reps: reps, sets: sets};
+    special_data={weight: arrayOutput(weight), reps: arrayOutput(reps), sets: weight.length};
+    for(let i=0; i<weight.length; i++){
+        weight[i] = 0;
+        reps[i] = 0;
+    }
 }
 
 function formula()
 {
-    console.log(reps);
-    if(reps === 0){
-        value=0;
-        return;
+    let rm = [];
+    for(let i=0; i<weight.length; i++){
+        if(validateNumber(reps[i]) == 0)
+            rm[i] = 0;
+        else
+            rm[i] = (validateNumber(weight[i]) * ((validateNumber(reps[i])/30)+1));
     }
-    console.log("i leave");
-    // value = weight * reps * sets;
-    value = (weight * ((reps/30)+1)) * sets;
+    let average = (rm) => rm.reduce((a, b) => a + b) / rm.length;
+    value = average(rm);
+    value = Math.round(value * 100) / 100
+    console.log(value);
+
+    // if(reps === 0){
+    //     value=0;
+    //     return;
+    // }
+    // console.log("i leave");
+    // value = (weight * ((reps/30)+1)) * sets;
+}
+
+function arrayOutput(arr){
+    let str="";
+    arr.map(o=>{
+        str+= String(o)+",";
+    });
+    return str;
 }

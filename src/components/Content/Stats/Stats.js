@@ -56,9 +56,9 @@ function getExtra(index,data){
     let a = "";
     if(data[index].special_data){
         let thing = data[index].special_data;
-        a += " | weight: "+thing.weight+" "+weightType;
-        a += ", reps: "+ thing.reps;
-        a += ", sets: "+thing.sets;
+        a += " | weight: "+thing.weight;
+        a += " reps: "+ thing.reps;
+        a += " sets: "+thing.sets;
     }
     // return JSON.stringify(data[index].special_data);
     return a;
@@ -96,5 +96,6 @@ function getLowest(data){
 }
 
 function getAverage(data){
-    return data.reduce((r, c) => r + c.y, 0) / data.length;
+    let a = data.reduce((r, c) => r + c.y, 0) / data.length;
+    return Math.round(a * 100) / 100
 }

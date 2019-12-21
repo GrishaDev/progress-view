@@ -2,9 +2,25 @@
   padding: 0;
   margin: 0;
 }
+html{
+  height: 100%;
+  /* background: #8e9eab;
+  background: -webkit-linear-gradient(to bottom, #eef2f3, #8e9eab); 
+  background: linear-gradient(to bottom, #eef2f3, #8e9eab); */
+  background-image: url(/skybg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+
+
+}
 
 body{
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
+  /* background-image: url(/skybg.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
+  
 }
 
 .header-root {
@@ -57,6 +73,10 @@ body{
   justify-content: center;
 }
 
+.graphAddDialog{
+  min-height: 600px;
+}
+
 .options{
   width: 50%;
   margin: 0 auto;
@@ -88,6 +108,8 @@ body{
 }
 
 .form-formula{
+  margin-top: 10px;
+  width: 80%;
   display: flex;
   justify-content: center;
 }
@@ -97,12 +119,40 @@ body{
 }
 
 
+.ihatecss{
+  /* position: absolute; */
+  /* width: 20%; */
+  right: 0;
+  float: right;
+  /* background-color: red; */
+}
+.ihatecss2{
+  /* position: absolute; */
+  width: 100%;
+  right: 0;
+  /* background-color: green; */
+}
+.ihatecss2:hover{
+  color: red;
+}
+
+.ihatecss3{
+  /* position: absolute; */
+  width: 100%;
+  right: 0;
+  /* background-color: yellow; */
+}
+.ihatecss3:hover{
+  color: red;
+}
+
+
 
 
 /* -----------------login -----------------*/
 
 .login-page{
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
   height: 100vh;
   display: flex;
   justify-content: center;

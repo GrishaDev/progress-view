@@ -45,7 +45,7 @@ export default function Login(props) {
         <div className="login-page">
             <Paper className={'login-paper'}>
                 <div className='login-content'>
-                    <TextField label="Name" variant="outlined" fullWidth onKeyDown={keyPress} onChange={onInput} autoFocus/>
+                    <TextField label="Name" variant="outlined" type="password" fullWidth onKeyDown={keyPress} onChange={onInput} autoFocus/>
                 </div>
                 <div className='login-actions'>
                     <Button variant="contained"  color="primary" disabled={disabled} onClick={submitHandle}>Enter</Button>

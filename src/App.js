@@ -4,68 +4,71 @@ import Header from './components/Header/Header';
 import Content from './components/Content/Content';
 import axios from 'axios';
 import Nothing from './components/Nothing'
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 
+// let data = [];
 
-let data = [];
+let data = [{
+  name: "games",
+  graphs: [{
+    name: "Roofcampers in rust",
+    type: "gym",
+    data: [{ x: new Date(2013, 1, 1), y: 140 },
+    { x: new Date(1987, 1, 1), y: 12 },
+    { x: new Date(1993, 1, 1), y: 14 },
+    { x: new Date(1997, 1, 1), y: 18 },
+    { x: new Date(2001, 1, 1), y: 52 },
+    { x: new Date(2005, 1, 1), y: 80 },
+    { x: new Date(2011, 1, 1), y: 150 },
+    { x: new Date(2015, 1, 1), y: 170 }]
+  },
+  {
+    name: "Balanced matches in dota",
+    type: "matches",
+    data: [{ x: new Date(2013, 1, 1), y: 400 },
+    { x: new Date(1987, 1, 1), y: 320 },
+    { x: new Date(1993, 1, 1), y: 280 },
+    { x: new Date(1997, 1, 1), y: 150 },
+    { x: new Date(2001, 1, 1), y: 210 },
+    { x: new Date(2005, 1, 1), y: 120 },
+    { x: new Date(2011, 1, 1), y: 80 },
+    { x: new Date(2015, 1, 1), y: 2 }]
+  }
+  ]
+},
+{
+  name: "ugh",
+  graphs: [{
+    name: "uga",
+    type: "meme",
+    data: [{ x: new Date(2013, 1, 1), y: 140 },
+    { x: new Date(1987, 1, 1), y: 12 },
+    { x: new Date(1993, 1, 1), y: 14 },
+    { x: new Date(1997, 1, 1), y: 18 },
+    { x: new Date(2001, 1, 1), y: 52 },
+    { x: new Date(2005, 1, 1), y: 80 },
+    { x: new Date(2011, 1, 1), y: 150 },
+    { x: new Date(2015, 1, 1), y: 170 }]
+  },
+  {
+    name: "dada",
+    type: "xd",
+    data: [{ x: new Date(2013, 1, 1), y: 400 },
+    { x: new Date(1987, 1, 1), y: 320 },
+    { x: new Date(1993, 1, 1), y: 280 },
+    { x: new Date(1997, 1, 1), y: 150 },
+    { x: new Date(2001, 1, 1), y: 210 },
+    { x: new Date(2005, 1, 1), y: 120 },
+    { x: new Date(2011, 1, 1), y: 80 },
+    { x: new Date(2015, 1, 1), y: 2 }]
+  }
+  ]
+}
+]
 
-// let data = [{
-//   name: "games",
-//   graphs: [{
-//     name: "Roofcampers in rust",
-//     type: "noobs",
-//     data: [{ x: new Date(2013, 1, 1), y: 140 },
-//     { x: new Date(1987, 1, 1), y: 12 },
-//     { x: new Date(1993, 1, 1), y: 14 },
-//     { x: new Date(1997, 1, 1), y: 18 },
-//     { x: new Date(2001, 1, 1), y: 52 },
-//     { x: new Date(2005, 1, 1), y: 80 },
-//     { x: new Date(2011, 1, 1), y: 150 },
-//     { x: new Date(2015, 1, 1), y: 170 }]
-//   },
-//   {
-//     name: "Balanced matches in dota",
-//     type: "matches",
-//     data: [{ x: new Date(2013, 1, 1), y: 400 },
-//     { x: new Date(1987, 1, 1), y: 320 },
-//     { x: new Date(1993, 1, 1), y: 280 },
-//     { x: new Date(1997, 1, 1), y: 150 },
-//     { x: new Date(2001, 1, 1), y: 210 },
-//     { x: new Date(2005, 1, 1), y: 120 },
-//     { x: new Date(2011, 1, 1), y: 80 },
-//     { x: new Date(2015, 1, 1), y: 2 }]
-//   }
-//   ]
-// },
-// {
-//   name: "ugh",
-//   graphs: [{
-//     name: "uga",
-//     type: "meme",
-//     data: [{ x: new Date(2013, 1, 1), y: 140 },
-//     { x: new Date(1987, 1, 1), y: 12 },
-//     { x: new Date(1993, 1, 1), y: 14 },
-//     { x: new Date(1997, 1, 1), y: 18 },
-//     { x: new Date(2001, 1, 1), y: 52 },
-//     { x: new Date(2005, 1, 1), y: 80 },
-//     { x: new Date(2011, 1, 1), y: 150 },
-//     { x: new Date(2015, 1, 1), y: 170 }]
-//   },
-//   {
-//     name: "dada",
-//     type: "xd",
-//     data: [{ x: new Date(2013, 1, 1), y: 400 },
-//     { x: new Date(1987, 1, 1), y: 320 },
-//     { x: new Date(1993, 1, 1), y: 280 },
-//     { x: new Date(1997, 1, 1), y: 150 },
-//     { x: new Date(2001, 1, 1), y: 210 },
-//     { x: new Date(2005, 1, 1), y: 120 },
-//     { x: new Date(2011, 1, 1), y: 80 },
-//     { x: new Date(2015, 1, 1), y: 2 }]
-//   }
-//   ]
-// }
-// ]
-
+let message="error";
+let requestmsg;
 
 class App extends React.Component {
   constructor(props) {
@@ -87,37 +90,53 @@ class App extends React.Component {
     this.newGraph= this.newGraph.bind(this);
     this.delete= this.delete.bind(this);
     this.graphUpdate= this.graphUpdate.bind(this);
+    this.handleSnackClose= this.handleSnackClose.bind(this);
+  }
+
+  handleSnackClose(){
+    this.setState({open:false});
   }
 
   async componentDidMount() {
-    let a = await getData();
-    data = a;
+    // let a = await getData();
+    // data = a;
 
-    data.map(c =>{
-      c.graphs.map(g=> {
-        g.data.map( o=>{
-          o.x = new Date(o.x);
-        })
-      })
-    })
+    // data.map(c =>{
+    //   c.graphs.map(g=> {
+    //     g.data.map( o=>{
+    //       o.x = new Date(o.x);
+    //     })
+    //   })
+    // })
 
     if(data.length > 0){
       this.first = data[0];
 
       this.setState ({ current: { name: this.first.graphs[0].name,
       type: this.first.graphs[0].type,
-      data: this.first.graphs[0].data, category: 0, graph: 0 } });
+      data: this.first.graphs[0].data, category: 0, graph: 0 } , open: false});
     }
     document.title="Progress View";
   }
 
-  async newValue(date,value,category,graph, special, special_data){
-    if(!special)
-      data[category].graphs[graph].data.push({x: date, y: parseInt(value)});
+  snackMessage(){
+    if(requestmsg.length > 0)
+      message = requestmsg;
     else
-      data[category].graphs[graph].data.push({x: date, y: parseInt(value), special_data: special_data});
+      message="success";
+    this.state.open = true;
+  }
+
+  async newValue(date,value,category,graph, special, special_data){
+    console.log(value);
+    if(!special)
+      data[category].graphs[graph].data.push({x: date, y: value});
+    else
+      data[category].graphs[graph].data.push({x: date, y: value, special_data: special_data});
 
     await saveData(data);
+
+    this.snackMessage();
 
     this.setState({ current: { name: data[category].graphs[graph].name,
     type: data[category].graphs[graph].type,
@@ -132,6 +151,8 @@ class App extends React.Component {
     let graph_index = a.graph_index;
 
     await saveData(data);
+
+    this.snackMessage();
 
     this.setState({ current: { name: data[category_index].graphs[graph_index].name,
     type: data[category_index].graphs[graph_index].type,
@@ -154,6 +175,8 @@ class App extends React.Component {
       data.splice(cat,1);
     
     await saveData(data);
+
+    this.snackMessage();
 
     if(data.length > 0){
       let first = data[0];
@@ -183,6 +206,8 @@ class App extends React.Component {
 
     await saveData(data);
 
+    this.snackMessage();
+    
     this.setState( { current: { name: current.name, type: current.type, data: parsed, category: cat, graph: grf } });
   }
 
@@ -201,6 +226,19 @@ class App extends React.Component {
       <>
         {header}
         {content}
+                <Snackbar
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                open={this.state.open}
+                autoHideDuration={3000}
+                onClose={this.handleSnackClose}
+                ContentProps={{
+                  'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">{message}</span>}
+              />
       </>
     );
   }
@@ -236,13 +274,17 @@ async function getData(){
     try{
       let res = await axios.get('/api');
       if(res.status){
+          requestmsg = "";
           return res.data.data;
       }
-      else
-          alert("error");
+      else{
+          // alert("error");
+          requestmsg = "error";
+      }
   }
   catch{
-      alert("error contacting server");
+      // alert("error contacting server");
+      requestmsg = "error contacting server";
   }
   return [];
 }
@@ -251,13 +293,18 @@ async function saveData(data){
   try{
     let res = await axios.post('/api/update',{data:data});
     if(res.status){
+        requestmsg = "";
         console.log(res.data.msg);
     }
-    else
-        alert("error");
+    else{
+        // alert("error");
+        message="error";
+        requestmsg = "error";
+    }
   }
   catch{
-      alert("error contacting server");
+      // alert("error contacting server");
+      requestmsg = "error contacting server";
   }
 }
 
