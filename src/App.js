@@ -5,7 +5,7 @@ import Content from './components/Content/Content';
 import axios from 'axios';
 import Nothing from './components/Nothing'
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
+// import SnackbarContent from '@material-ui/core/SnackbarContent';
 
 // let data = [];
 
@@ -124,7 +124,7 @@ class App extends React.Component {
       message = requestmsg;
     else
       message="success";
-    this.state.open = true;
+    this.setState({open:true});
   }
 
   async newValue(date,value,category,graph, special, special_data){
@@ -207,7 +207,7 @@ class App extends React.Component {
     await saveData(data);
 
     this.snackMessage();
-    
+
     this.setState( { current: { name: current.name, type: current.type, data: parsed, category: cat, graph: grf } });
   }
 

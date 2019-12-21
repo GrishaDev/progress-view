@@ -18,6 +18,7 @@ export default function Add(props){
 
     function dialogDone(date,value,category, graph, special, special_data){
         props.newValue(date,value,category,graph, special, special_data);
+        dialogClose();
     }
 
     return (

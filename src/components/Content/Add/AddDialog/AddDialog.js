@@ -90,7 +90,7 @@ export default class AddDialog extends React.Component {
 
             for(let i=0; i<this.state.sets; i++){
                 extrafields.push( <TextField  key={"annoyingshit1"+String(i)} label="weight" variant="outlined" type="number" id="weight"
-                onChange={(e)=> weight[i]=e.target.value}
+                onChange={(e)=> weight[i]=e.target.value }
                 style={ {margin: '0 0 0 0',width: '25%'}} helperText='example: 20' /> );
 
                 extrafields.push( <TextField  key={"annoyingshit2"+String(i)} label="reps" variant="outlined" type="number" id="reps"
